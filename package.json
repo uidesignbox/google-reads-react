@@ -4,8 +4,8 @@
   "description": "Google Books and NYT Api web application",
   "main": "index.js",
   "scripts": {
-   "start": "webpack-dev-server --mode development --hot",
-   "build": "webpack --mode production"
+    "start": "webpack-dev-server --mode development --hot",
+    "build": "webpack --mode production"
   },
   "author": "UiDesignBox - @awesomekangaroo",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "prop-types": "^15.6.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
     "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
