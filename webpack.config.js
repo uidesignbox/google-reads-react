@@ -19,6 +19,11 @@ module.exports = {
                },
             ]
          },
+         // {
+         //    test: /\.mjs$/,
+         //    include: /node_modules/,
+         //    type: "javascript/auto",
+         // },
          {
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
@@ -39,7 +44,7 @@ module.exports = {
       historyApiFallback: true
    },
    resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.mjs', '.js', '.jsx']
    },
    plugins: [
       new HtmlWebPackPLugin({
