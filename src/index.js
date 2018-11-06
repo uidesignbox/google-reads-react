@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
-import Layout from './components/Layout';
 import IndexPage from './components/Index/IndexPage';
+import DetailPage from './components/Detail/DetailPage';
 
 import './components/Icons';
 import './css/css-reset.scss';
@@ -17,9 +17,8 @@ const App = () => (
    <Router>
       <ApolloProvider client={client}>
          <Switch>
-            <Layout>
-               <Route exact path="/" component={IndexPage} />
-            </Layout>
+            <Route exact path="/" component={IndexPage} />
+            <Route exact path="/book/:title" component={DetailPage} />
          </Switch>
       </ApolloProvider>
    </Router>

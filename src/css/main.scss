@@ -19,7 +19,7 @@
 
 .header-search__container {
    position: absolute;
-   top: 70px;
+   top: 68px;
    margin: 0 auto;
    width: 100%;
    padding: 15px 0;
@@ -62,7 +62,7 @@
 .carousel__book-list {
    display: flex;
    flex-direction: row;
-   justify-content: space-between;
+   overflow-x: scroll;
 }
 
 .carousel__title {
@@ -74,23 +74,27 @@
 }
 
 .carousel__item {
-   max-width: 120px;
+   margin-right: 25px;
+   width: 100px;
+   max-width: 200px;
    font-family: 'Times New Roman', Times, serif;
 }
 
 .carousel__cover {
    width: 100%;
-   box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.2);
+   box-shadow: 0 0px 7px 1px rgba(0, 0, 0, 0.2);
 }
 
 .carousel__item--title {
    margin-bottom: 10px;
    font-size: 18px;
    font-weight: 600;
+   color: #000;
 }
 
 .carousel__item--author {
-   color: #777;
+   font-size: 16px;
+   color: #555;
    line-height: 120%;
 }
 

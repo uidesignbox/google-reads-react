@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Header from './Header/Header';
 import '../css/main.scss';
 
-const Layout = ({ children }) => (
-   <div>
-      <Header />
+const Layout = ({ children, history }) => (
+   <Fragment>
+      <Header history={history} />
       { children }
-   </div>
+   </Fragment>
 );
 
 export default Layout

@@ -23,6 +23,21 @@ const GoogleCovers = new GraphQLObjectType({
          resolve: data => data.thumbnail
       }
    })
+});
+
+const ISBNS = new GraphQLObjectType({
+   name: "ISBNS",
+   description: "Get the main isbns of book.",
+   fields: () => ({
+      isbn10: {
+         type: GraphQLString,
+         resolve: data => data.isbn10
+      },
+      isbn13: {
+         type: GraphQLString,
+         resolve: data => data.isbn13
+      }
+   })
 })
 
 const VolumeInfo = new GraphQLObjectType({
@@ -32,6 +47,10 @@ const VolumeInfo = new GraphQLObjectType({
       title: {
          type: GraphQLString,
          resolve: data => data.title
+      },
+      subtitle: {
+         type: GraphQLString,
+         resolve: data => data.subtitle
       },
       authors: {
          type: GraphQLString,
@@ -52,6 +71,14 @@ const VolumeInfo = new GraphQLObjectType({
       published_date: {
          type: GraphQLString,
          resolve: data => data.publishedDate
+      },
+      page_count: {
+         type: GraphQLInt,
+         resolve: data => data.pageCount
+      },
+      categories: {
+         type: GraphQLString,
+         resolve: data => data.categories[0]
       },
       images: {
          type: GoogleCovers,
@@ -121,6 +148,10 @@ const BookListInfo = new GraphQLObjectType({
          type: new GraphQLList(NYTBooks),
          resolve: data => data.book_details
       },
+      isbns: {
+         type: new GraphQLList(ISBNS),
+         resolve: data => data.isbns
+      }
    })
 });
 
@@ -138,8 +169,8 @@ module.exports = new GraphQLSchema({
                .then(data => data.results)
             }
          },
-         search: {
-            description: 'Perform search query for books and its possible volumes.',
+         search_title: {
+            description: 'Perform search query for books and its possible volumes using title.',
             args: {
                title: { type: GraphQLString }
             },
@@ -148,11 +179,20 @@ module.exports = new GraphQLSchema({
                return fetch(`https://www.googleapis.com/books/v1/volumes?q=${args.title}`)
                .then(response => response.json())
                .then(data => data.items)
-               // .then(data => console.log(JSON.stringify(data, null, 2)))
+            }
+         },
+         search_isbn: {
+            description: 'Perform search query for books and its possible volumes using isbn number.',
+            args: {
+               isbn: { type: GraphQLString }
+            },
+            type: new GraphQLList(GoogleBooks),
+            resolve: (root, args) => {
+               return fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${args.isbn}`)
+               .then(response => response.json())
+               .then(data => data.items)
             }
          }
       })
    })
 })
-
-// module.exports = mainSchema;

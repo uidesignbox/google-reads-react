@@ -7,7 +7,8 @@ module.exports = {
       main: './src/index.js'
    },
    output: {
-      filename: 'main.js'
+      filename: 'main.js',
+      publicPath:'/'
    },
    module: {
       rules: [
@@ -19,11 +20,6 @@ module.exports = {
                },
             ]
          },
-         // {
-         //    test: /\.mjs$/,
-         //    include: /node_modules/,
-         //    type: "javascript/auto",
-         // },
          {
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
