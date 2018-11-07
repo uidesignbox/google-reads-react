@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const fetch = require('node-fetch');
-let nytKey = '';
+let nytKey = '236c8ec924b04206a3c1fdee381d7079';
 
 let {
    GraphQLString,
@@ -83,6 +83,10 @@ const VolumeInfo = new GraphQLObjectType({
       images: {
          type: GoogleCovers,
          resolve: data => data.imageLinks
+      },
+      preview_book: {
+         type: GraphQLString,
+         resolve: data => data.previewLink
       }
    })
 })

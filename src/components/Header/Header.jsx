@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Logo from '../../utils/book_icon.svg';
 import Overlay from '../Overlay';
 import HeaderSearchContainer from './HeaderSearchContainer';
@@ -10,6 +10,7 @@ class Header extends Component {
       super();
       this.state = {
          isSearchOpen: null,
+         submit: null,
          query: null
       }
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,7 +43,9 @@ class Header extends Component {
 
    handleSubmit(event) {
       event.preventDefault();
-      // Pass the query to Search.jsx component route.
+      if (this.state.query.length > 1) {
+         this.setState({ submit: true });
+      }
    }
 
    render() {
@@ -59,6 +62,12 @@ class Header extends Component {
                <HeaderSearchContainer handleSubmit={this.handleSubmit} handleUpdate={this.handleUpdate} /> }
             {this.state.isSearchOpen &&
                <Overlay /> }
+               
+            {this.state.submit &&
+               <Redirect to={{
+                  pathname: `/search/${this.state.query}`,
+                  state: { search: this.state.query }
+               }} /> }
          </div>
       )
    }

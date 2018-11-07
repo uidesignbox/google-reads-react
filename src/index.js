@@ -5,6 +5,7 @@ import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import IndexPage from './components/Index/IndexPage';
 import DetailPage from './components/Detail/DetailPage';
+import SearchPage from './components/Search/SearchPage';
 
 import './components/Icons';
 import './css/css-reset.scss';
@@ -18,7 +19,8 @@ const App = () => (
       <ApolloProvider client={client}>
          <Switch>
             <Route exact path="/" component={IndexPage} />
-            <Route exact path="/book/:title" component={DetailPage} />
+            <Route path="/book/:title" component={DetailPage} />
+            <Route path="/search/:title" component={SearchPage} />
          </Switch>
       </ApolloProvider>
    </Router>
