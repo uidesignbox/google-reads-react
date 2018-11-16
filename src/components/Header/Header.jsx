@@ -53,8 +53,10 @@ class Header extends Component {
          <div className="header__container">
             { this.props.history &&
                <FontAwesomeIcon icon="long-arrow-alt-left" className="back__icon" onClick={this.props.history.goBack} /> }
-            <Link to={'/'} className="header__logo">
-               <img src={ Logo } alt="Web app logo" />
+            
+            <Link to={'/'} className="header__logo" title="Link back to homepage">
+               <img src={ Logo } alt="Logo for web application" />
+               <small>Google Book Reads</small>
             </Link>
             <FontAwesomeIcon icon="search" className="search__icon" onClick={this.toggleSearch} />
             

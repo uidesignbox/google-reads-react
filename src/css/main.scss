@@ -1,4 +1,4 @@
-$font-stack-serif: 'Times New Roman', Times, serif;
+$font-stack-serif: Garamond, Palatino, serif;
 
 .header__container {
    display: flex;
@@ -11,7 +11,17 @@ $font-stack-serif: 'Times New Roman', Times, serif;
 }
 
 .header__logo {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
    margin: auto;
+   small {
+      padding-top: 5px;
+      font-size: 17px;
+      font-family: cursive;
+      font-weight: 600;
+      color: #000;
+   }
 }
 
 .back__icon, .search__icon {
@@ -21,7 +31,7 @@ $font-stack-serif: 'Times New Roman', Times, serif;
 
 .header-search__container {
    position: absolute;
-   top: 68px;
+   top: 90px;
    margin: 0 auto;
    width: 100%;
    padding: 15px 0;
@@ -36,15 +46,18 @@ $font-stack-serif: 'Times New Roman', Times, serif;
    max-width: 500px;
    flex-direction: row;
    justify-content: center;
-   align-items: center;
    input {
-      padding: 10px 10px 10px 20px;
+      width: 100%;
+      padding: 15px 10px 15px 20px;
       font-size: 15px;
       color: #000;
       outline: none;
       border: none;
       &:focus {
          border: 2px solid #22C9D4;
+      }
+      &::placeholder {
+         color: #000;
       }
    }
    button {
@@ -114,17 +127,17 @@ $font-stack-serif: 'Times New Roman', Times, serif;
    padding: 30px 15px;
    background: #f9f9f9;
    header {
+      flex: 1;
       max-width: 500px;
-      margin-bottom: 20px;
    }
 }
 
 .detail__head-img {
-   margin-right: 25px;
-   box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.5);
+   flex: 1;
+   max-width: 150px;
+   margin-right: 15px;
    img {
-      width: 100%;
-      height: 100%;
+      box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.5);
    }
 }
 
@@ -149,8 +162,8 @@ $font-stack-serif: 'Times New Roman', Times, serif;
 }
 
 .detail__head-btn {
-   position: absolute;
-   bottom: 15%;
+   display: block;
+   margin: 10px auto 10px 0;
    padding: 7px 20px;
    font-size: 17px;
    border-radius: 5px;
@@ -277,12 +290,17 @@ $font-stack-serif: 'Times New Roman', Times, serif;
       font-weight: 600;
    }
    &-author {
-      margin-bottom: 5px;
+      margin-bottom: 7px;
       font-style: italic;
       color: #555;
    }
    &-date {
+      padding-top: 5px;
       color: #555;
+      .icon {
+         font-size: 14px;
+         margin-left: 5px;
+      }
    }
    .icon {
       color: #000;
@@ -304,4 +322,66 @@ $font-stack-serif: 'Times New Roman', Times, serif;
    z-index: 100;
    height: 100%;
    background: rgba(0, 0, 0, 0.75);
+}
+
+.placeholder {
+   &__wrapper {
+      margin: 0 auto;
+      padding: 25px 20px;
+   }
+   &__item {
+      display: flex;
+      flex-direction: row;
+      max-width: 400px;
+      margin: 0 auto 25px;
+      padding: 20px 15px;
+      border-radius: 5px;
+      background: linear-gradient(-260deg, #cb327a, #CBE);
+      background-size: 150% 100%;
+      -webkit-animation: GradientLoading 2s ease-in infinite;
+      -moz-animation: GradientLoading 2s ease-in infinite;
+      animation: GradientLoading 2s ease-in infinite;
+      &:last-child {
+         margin-bottom: 0;
+      }
+   }
+   &__image {
+      height: 55px;
+      width: 85px;
+      margin-right: 20px;
+      border-radius: 50%;
+      background: #eee;
+   }
+   &__content {
+      width: 100%;
+   }
+   &__top {
+      width: 100%;
+      height: 25px;
+      max-width: 300px;
+      background: #eee;
+      margin-bottom: 20px;
+   }
+   &__bottom {
+      width: 70%;
+      height: 20px;
+      max-width: 300px;
+      background: #eee;
+   }
+}
+
+@-webkit-keyframes GradientLoading {
+    0%{background-position:0% 13%}
+    50%{background-position:100% 88%}
+    100%{background-position:0% 13%}
+}
+@-moz-keyframes GradientLoading {
+    0%{background-position:0% 13%}
+    50%{background-position:100% 88%}
+    100%{background-position:0% 13%}
+}
+@keyframes GradientLoading { 
+    0%{background-position:0% 13%}
+    50%{background-position:100% 88%}
+    100%{background-position:0% 13%}
 }

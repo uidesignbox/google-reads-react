@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const fetch = require('node-fetch');
-let nytKey = '236c8ec924b04206a3c1fdee381d7079';
+let nytKey = '';
 
 let {
    GraphQLString,
@@ -24,6 +24,28 @@ const GoogleCovers = new GraphQLObjectType({
       }
    })
 });
+
+const CategoryType = new GraphQLObjectType({
+   name: "Categories",
+   description: "Get the categories of book.",
+   fields: () => ({
+      name: {
+         type: GraphQLString,
+         resolve: data => data
+      }
+   })
+})
+
+const AuthorsType = new GraphQLObjectType({
+   name: "Authors",
+   description: "Get the authors of a book.",
+   fields: () => ({
+      name: {
+         type: GraphQLString,
+         resolve: data => data
+      }
+   })
+})
 
 const ISBNS = new GraphQLObjectType({
    name: "ISBNS",
@@ -53,8 +75,8 @@ const VolumeInfo = new GraphQLObjectType({
          resolve: data => data.subtitle
       },
       authors: {
-         type: GraphQLString,
-         resolve: data => data.authors[0]
+         type: new GraphQLList(AuthorsType),
+         resolve: data => data.authors
       },
       publisher: {
          type: GraphQLString,
@@ -77,8 +99,8 @@ const VolumeInfo = new GraphQLObjectType({
          resolve: data => data.pageCount
       },
       categories: {
-         type: GraphQLString,
-         resolve: data => data.categories[0]
+         type: new GraphQLList(CategoryType),
+         resolve: data => data.categories
       },
       images: {
          type: GoogleCovers,
@@ -166,9 +188,13 @@ module.exports = new GraphQLSchema({
       fields: () => ({
          book_list: {
             description: "Retrieve NYT book list info from a defined list.",
+            args: {
+               title: { type: GraphQLString }
+               // paperback-nonfiction
+            },
             type: new GraphQLList(BookListInfo),
-            resolve: (root) => {
-               return fetch(`https://api.nytimes.com/svc/books/v3/lists.json?list-name=paperback-nonfiction&api-key=${nytKey}`)
+            resolve: (root, args) => {
+               return fetch(`https://api.nytimes.com/svc/books/v3/lists.json?list-name=${args.title}&api-key=${nytKey}`)
                .then(response => response.json())
                .then(data => data.results)
             }

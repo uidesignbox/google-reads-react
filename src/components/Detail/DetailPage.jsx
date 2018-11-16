@@ -5,6 +5,7 @@ import { Query } from 'react-apollo';
 import DetailHead from './DetailHead';
 import DetailDescription from './DetailDescription';
 import DetailMetaContent from './DetailMetaContent';
+import HTMLPlaceholder from '../Search/HTMLPlaceholder';
 
 
 class DetailPage extends Component {
@@ -18,12 +19,16 @@ class DetailPage extends Component {
                title
                subtitle
                description
-               authors
+               authors {
+                  name
+               }
                language
                publisher
                published_date
                page_count
-               categories
+               categories {
+                  name
+               }
                images {
                  small
                  normal
@@ -40,7 +45,8 @@ class DetailPage extends Component {
             {!this.props.location.state.isFromSearch ? 
                <Query query={GET_BOOK_BY_ISBN}>
                   {({ data, loading }) => {
-                     if (loading) return '';
+                     if (loading) return <HTMLPlaceholder />;
+                     if (data && !data.search_isbn) return `Sorry no book found with the isbn: ${query}`;
                      const detail = data.search_isbn[0].volume_info;
                      return (
                         <Fragment>

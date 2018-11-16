@@ -5,7 +5,7 @@ import SearchItem from './SearchItem';
 const SearchResults = (props) => (
    <div className="search__results-container">
       {props.results.map((item, i) => 
-         <SearchItem key={i} detail={item.volume_info} />
+         <SearchItem key={i} detail={item.volume_info} {...item.volume_info} />
       )}
    </div>
 );

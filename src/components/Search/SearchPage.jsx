@@ -4,6 +4,7 @@ import { Query } from 'react-apollo';
 import Layout from '../Layout';
 import SearchHead from './SearchHead';
 import SearchResults from './SearchResults';
+import HTMLPlaceholder from './HTMLPlaceholder';
 
 class SearchPage extends Component {
    constructor() {
@@ -22,12 +23,16 @@ class SearchPage extends Component {
                title
                subtitle
                description
-               authors
+               authors {
+                  name
+               }
                language
                publisher
                published_date
                page_count
-               categories
+               categories {
+                  name
+               }
                images {
                   small
                   normal
@@ -39,10 +44,10 @@ class SearchPage extends Component {
       return (
          <Layout history={this.props.history}>
             <SearchHead query={query} count={this.state.count} />
-            <Query query={SEARCH_BOOK_TITLE}>
-               {({ data, loading }) => {
-                  // Add HTML placeholder content
-                  if (loading) return 'hold up';
+            <Query query={SEARCH_BOOK_TITLE} fetchPolicy="no-cache">
+               {({ data, loading, error }) => {
+                  if (loading) return <HTMLPlaceholder />;
+                  if (error) return `Sorry nothing found for: ${query}`;
                   return (
                      <SearchResults results={data.search_title} />
                   )

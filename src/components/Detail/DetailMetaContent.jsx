@@ -22,9 +22,13 @@ const DetailMetaContent = ({ title, subtitle, publisher, date, language, product
    </div>
 );
 
-// DetailMetaContent.propTypes = {
-//    detail: PropTypes.object,
-//    product: PropTypes.string
-// }
+DetailMetaContent.propTypes = {
+   title: PropTypes.string,
+   subtitle: PropTypes.string,
+   publisher: PropTypes.string,
+   date: PropTypes.string,
+   language: PropTypes.string,
+   product: PropTypes.string
+};
 
 export default DetailMetaContent;

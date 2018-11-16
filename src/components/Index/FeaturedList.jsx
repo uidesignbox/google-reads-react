@@ -5,6 +5,25 @@ import ListItem from './FeaturedListItem';
 
 class FeaturedList extends Component {
    render() {
+      // const title = "paperback-nonfiction";
+      const title = "science";
+      const GET_BOOK_LIST = gql`
+      {
+         book_list(title: "${title}") {
+            amazon_product_url
+            details {
+               title
+               contributor
+               primary_isbn13
+               primary_isbn10
+         }
+         isbns {
+               isbn10
+               isbn13
+            }
+         }
+      }
+      `
       const Title = () => <h2 className="carousel__title">New Books List</h2>;
       return (
          <div className="carousel__book-container">
@@ -25,21 +44,3 @@ class FeaturedList extends Component {
 };
 
 export default FeaturedList;
-
-const GET_BOOK_LIST = gql`
-{
-   book_list {
-      amazon_product_url
-      details {
-         title
-         contributor
-         primary_isbn13
-         primary_isbn10
-     }
-     isbns {
-         isbn10
-         isbn13
-      }
-   }
-}
-`
