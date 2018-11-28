@@ -2,16 +2,17 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const ListItem = (props) => (
+const ListItem = ({ title, contributor, images, detail, productUrl }) => (
    <li className="carousel__item">
       <Link to={{
-         pathname: `/book/${props.detail.title.toLowerCase()}`,
-         state: { ...props }
+         pathname: `/book/${title.toLowerCase()}`,
+         state: { detail, productUrl }
       }}>
-         <img src="https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image" alt="Featured cover of book" className="carousel__cover"/>
+         {images &&
+            <img src={images.small} alt={`Book cover for ${title}`} className="carousel__cover"/> }
          <div className="carousel-meta__content">
-            <h4 className="carousel__item--title">{props.detail.title}</h4>
-            <span className="carousel__item--author">{props.detail.contributor}</span>
+            <h4 className="carousel__item--title">{title}</h4>
+            <span className="carousel__item--author">{contributor}</span>
          </div>
       </Link>
    </li>
@@ -19,7 +20,9 @@ const ListItem = (props) => (
 
 ListItem.propTypes = {
    title: PropTypes.string,
-   contributor: PropTypes.string
+   contributor: PropTypes.string,
+   images: PropTypes.object,
+   detail: PropTypes.object,
 }
 
 export default ListItem;

@@ -1,25 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const DetailMetaContent = ({ title, subtitle, publisher, date, language, product }) => (
-   <div className="detail__meta-content">
+   <section className="detail__meta-content">
       <h2 className="main__title">Additional Info</h2>
       <small>{(`${title}${subtitle ? ' - ' + subtitle : ''}`)}</small>
-      <section className="meta__content-items">
-         <div className="meta__item">
-            <strong>Publisher: </strong><span>{publisher}</span>
+      <aside className="meta__content-items">
+         <div className="meta__item flex__item">
+            <div>
+               <strong><FontAwesomeIcon icon="book" /> Publisher: </strong>
+            </div>
+            <div>
+               <span>{publisher}</span>
+            </div>
          </div>
-         <div className="meta__item">
-            <strong>Published Date: </strong><span>{date}</span>
+         <div className="meta__item flex__item">
+            <div>
+               <strong><FontAwesomeIcon icon="calendar" /> Published Date: </strong>
+            </div>
+            <div>
+               <span>{date}</span>
+            </div>
          </div>
-         <div className="meta__item">
-            <strong>Language: </strong><span>{language}</span>
+         <div className="meta__item flex__item">
+            <div>
+               <strong><FontAwesomeIcon icon="language" /> Language: </strong>
+            </div>
+            <div>
+               <span>{language}</span>
+            </div>
          </div>
-         <button className="detail__meta-cta">
-            <a href={product} target="_blank">Buy Now</a>
-         </button>
-      </section>
-   </div>
+         {product && 
+         <a href={product} target="_blank">
+            <button className="detail__meta-cta">Buy Now</button>
+         </a>}
+      </aside>
+   </section>
 );
 
 DetailMetaContent.propTypes = {

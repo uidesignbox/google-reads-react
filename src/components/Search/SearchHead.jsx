@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SearchHead = (props) => (
+const SearchHead = ({ query, count }) => (
    <div className="search__head">
       <div className="search__query">
-         <strong>Your Search: </strong><span>{props.query}</span>
+         <strong>Your Search: </strong><span>{query}</span>
       </div>
       <div className="search__head-count">
-         <span>Results: </span><strong>{props.count}</strong>
+         <span>Top Results: </span><strong>{count}</strong>
       </div>
    </div>
 );
 
 SearchHead.propTypes = {
-   query: PropTypes.string
+   query: PropTypes.string,
+   count: PropTypes.number,
 };
 
 export default SearchHead;

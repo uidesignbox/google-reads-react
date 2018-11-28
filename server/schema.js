@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const fetch = require('node-fetch');
-let nytKey = '';
+let nytKey = '236c8ec924b04206a3c1fdee381d7079';
 
 let {
    GraphQLString,
@@ -155,6 +155,20 @@ const NYTBooks = new GraphQLObjectType({
       primary_isbn10: { 
          type: GraphQLString,
          resolve: data => data.primary_isbn10
+      },
+      book_image: {
+         type: GoogleCovers,
+         resolve: data => {
+            return fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${data.primary_isbn10}`)
+            .then(response => response.json())
+            .then(data => {
+               let all;
+               _.forEach(data.items, (item) => {
+                  all = item.volumeInfo.imageLinks;
+               })
+               return all;
+            })
+         }
       }
    })
 });
@@ -171,8 +185,8 @@ const BookListInfo = new GraphQLObjectType({
          resolve: data => data.amazon_product_url
       },
       details: {
-         type: new GraphQLList(NYTBooks),
-         resolve: data => data.book_details
+         type: NYTBooks,
+         resolve: data => data.book_details[0]
       },
       isbns: {
          type: new GraphQLList(ISBNS),
@@ -189,14 +203,21 @@ module.exports = new GraphQLSchema({
          book_list: {
             description: "Retrieve NYT book list info from a defined list.",
             args: {
-               title: { type: GraphQLString }
+               title: {
+                  type: GraphQLString
+               },
+               limit: {
+                  type: GraphQLInt
+               }
                // paperback-nonfiction
             },
             type: new GraphQLList(BookListInfo),
             resolve: (root, args) => {
                return fetch(`https://api.nytimes.com/svc/books/v3/lists.json?list-name=${args.title}&api-key=${nytKey}`)
                .then(response => response.json())
-               .then(data => data.results)
+               .then(data => {
+                  return args.limit ? data.results.slice(0, args.limit) : data.results
+               })
             }
          },
          search_title: {

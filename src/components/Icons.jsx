@@ -7,6 +7,11 @@ import {
    faBuilding,
    faArrowLeft,
    faLongArrowAltLeft,
+   faBookReader,
+   faLanguage,
+   faCalendar,
+   faBook,
+   faPauseCircle,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -14,6 +19,11 @@ library.add(
    faMapMarkerAlt,
    faUser,
    faClock,
+   faBookReader,
+   faLanguage,
+   faBook,
+   faPauseCircle,
+   faCalendar,
    faBuilding,
    faLongArrowAltLeft,
    faArrowLeft

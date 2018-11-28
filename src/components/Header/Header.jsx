@@ -51,17 +51,29 @@ class Header extends Component {
    render() {
       return (
          <div className="header__container">
-            { this.props.history &&
-               <FontAwesomeIcon icon="long-arrow-alt-left" className="back__icon" onClick={this.props.history.goBack} /> }
+            {this.props.history &&
+               <FontAwesomeIcon
+                  icon="long-arrow-alt-left"
+                  className="back__icon"
+                  onClick={this.props.history.goBack}
+               /> }
             
             <Link to={'/'} className="header__logo" title="Link back to homepage">
                <img src={ Logo } alt="Logo for web application" />
                <small>Google Book Reads</small>
             </Link>
-            <FontAwesomeIcon icon="search" className="search__icon" onClick={this.toggleSearch} />
+            <FontAwesomeIcon
+               icon="search"
+               className="search__icon"
+               onClick={this.toggleSearch}
+            />
             
-            {this.state.isSearchOpen &&
-               <HeaderSearchContainer handleSubmit={this.handleSubmit} handleUpdate={this.handleUpdate} /> }
+            <HeaderSearchContainer 
+               handleSubmit={this.handleSubmit} 
+               handleUpdate={this.handleUpdate}
+               open={this.state.isSearchOpen ? ' active' : ''}
+            />
+
             {this.state.isSearchOpen &&
                <Overlay /> }
                
